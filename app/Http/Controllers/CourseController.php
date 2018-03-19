@@ -3,17 +3,19 @@ namespace App\Http\Controllers;
 
 use App\Course;
 use Illuminate\Http\Request;
+use JWTAuth;
 
 class CourseController extends Controller
 {
     public function postCourse(Request $request)
     {
+        $user = JWTAuth::parseToken()->toUser();
         $course = new Course();
         $course->content = $request->input('content');
         $course->name = $request->input('name');
         $course->text = $request->input('text');
         $course->save();
-        return response()->json(['course' => $course], 201);
+        return response()->json(['course' => $course, 'user' => $user], 201);
     }
 
 

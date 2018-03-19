@@ -14,7 +14,8 @@ use Illuminate\Http\Request;
 */
 
 Route::post('/course', [
-    'uses' => 'CourseController@postCourse'
+    'uses' => 'CourseController@postCourse',
+    'middleware' => 'auth.jwt'
 ]);
 
 Route::get('/courses', [
@@ -22,9 +23,19 @@ Route::get('/courses', [
 ]);
 
 Route::put('/course/{id}', [
-    'uses' => 'CourseController@putCourse'
+    'uses' => 'CourseController@putCourse',
+    'middleware' => 'auth.jwt'
 ]);
 
 Route::delete('/course/{id}', [
-    'uses' => 'CourseController@deleteCourse'
+    'uses' => 'CourseController@deleteCourse',
+    'middleware' => 'auth.jwt'
+]);
+
+Route::post('/user', [
+    'uses' => 'UserController@signup'
+]);
+
+Route::post('/user/signin', [
+    'uses' => 'UserController@signin'
 ]);
